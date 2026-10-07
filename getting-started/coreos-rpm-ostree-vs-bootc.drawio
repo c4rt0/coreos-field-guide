@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="drawio" version="30.0.4">
+  <diagram name="rpm-ostree vs bootc" id="ostree-vs-bootc">
+    <mxGraphModel dx="2200" dy="1600" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="2200" pageHeight="1600" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- ==================== TITLE ==================== -->
+        <mxCell id="title" value="rpm-ostree and bootc: OS image-management models" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=26;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="150" y="10" width="970" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="Build input, transport, storage backend, and update controller are separate choices" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=14;fontColor=#888888;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="150" y="55" width="970" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== LEFT: RPM-OSTREE MODEL ==================== -->
+        <mxCell id="ostree_lane" value="Example: rpm-ostree management" style="swimlane;pointerEvents=0;html=1;startSize=35;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=16;fontStyle=1;rounded=1;swimlaneLine=1;fontColor=#1565C0;" vertex="1" parent="1">
+          <mxGeometry x="30" y="90" width="580" height="780" as="geometry" />
+        </mxCell>
+
+        <!-- Config -->
+        <mxCell id="o_phase1" value="1. DEFINE" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;fontColor=#1565C0;" vertex="1" parent="ostree_lane">
+          <mxGeometry x="10" y="45" width="80" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="o_treefile" value="Treefile / manifest (example)" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=14;verticalAlign=middle;align=center;fillColor=#BBDEFB;strokeColor=#1565C0;fontSize=12;fontStyle=1;" vertex="1" parent="ostree_lane">
+          <mxGeometry x="30" y="70" width="220" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="o_treefile_desc" value="RPM packages, repositories, OS settings.&#xa;Can also feed a Containerfile build.&#xa;Build input does not fix the runtime manager." style="text;html=1;align=left;verticalAlign=top;fontSize=10;fontColor=#555555;" vertex="1" parent="ostree_lane">
+          <mxGeometry x="270" y="65" width="290" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Build -->
+        <mxCell id="o_phase2" value="2. BUILD" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;fontColor=#1565C0;" vertex="1" parent="ostree_lane">
+          <mxGeometry x="10" y="135" width="80" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="o_cosa" value="COSA&#xa;(coreos-assembler)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#1565C0;fontSize=12;fontStyle=1;verticalAlign=middle;" vertex="1" parent="ostree_lane">
+          <mxGeometry x="30" y="160" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="o_cosa_desc" value="COSA orchestrates image builds.&#xa;Tree composition or manifest-driven&#xa;Containerfile/Buildah builds are possible." style="text;html=1;align=left;verticalAlign=top;fontSize=10;fontColor=#555555;" vertex="1" parent="ostree_lane">
+          <mxGeometry x="230" y="155" width="230" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="o_arrow1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#1565C0;" edge="1" parent="ostree_lane" source="o_treefile" target="o_cosa">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- OSTree commit -->
+        <mxCell id="o_phase3" value="3. OUTPUT" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;fontColor=#1565C0;" vertex="1" parent="ostree_lane">
+          <mxGeometry x="10" y="225" width="80" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="o_commit" value="OSTree / OCI OS Content" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#1565C0;fontSize=12;fontStyle=1;verticalAlign=middle;size=12;" vertex="1" parent="ostree_lane">
+          <mxGeometry x="30" y="250" width="180" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="o_commit_desc" value="Content-addressed OS filesystem content.&#xa;Unchanged objects/layers can be reused;&#xa;transfer granularity depends on transport." style="text;html=1;align=left;verticalAlign=top;fontSize=10;fontColor=#555555;" vertex="1" parent="ostree_lane">
+          <mxGeometry x="230" y="245" width="280" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="o_arrow2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#1565C0;" edge="1" parent="ostree_lane" source="o_cosa" target="o_commit">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Disk images -->
+        <mxCell id="o_disk" value="Disk Images" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#1565C0;fontSize=11;fontStyle=1;verticalAlign=middle;" vertex="1" parent="ostree_lane">
+          <mxGeometry x="300" y="320" width="130" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="o_disk_desc" value="qcow2, raw, ISO, AMI..." style="text;html=1;align=center;verticalAlign=top;fontSize=9;fontColor=#555555;fontStyle=2;" vertex="1" parent="ostree_lane">
+          <mxGeometry x="295" y="355" width="150" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="o_arrow2b" value="also&#xa;produces" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#1565C0;dashed=1;fontSize=9;fontColor=#888888;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="ostree_lane" source="o_commit" target="o_disk">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="210" y="337.5" /></Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Distribute -->
+        <mxCell id="o_phase4" value="4. DISTRIBUTE" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;fontColor=#1565C0;" vertex="1" parent="ostree_lane">
+          <mxGeometry x="10" y="385" width="120" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="o_repo" value="OSTree Remote /&#xa;OCI Image Source" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#1565C0;fontSize=11;fontStyle=1;verticalAlign=middle;size=12;" vertex="1" parent="ostree_lane">
+          <mxGeometry x="30" y="410" width="220" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="o_repo_desc" value="Current FCOS defaults to OCI transport.&#xa;Older/custom hosts can use OSTree remotes.&#xa;No dedicated OSTree server is required." style="text;html=1;align=left;verticalAlign=top;fontSize=10;fontColor=#555555;" vertex="1" parent="ostree_lane">
+          <mxGeometry x="270" y="415" width="260" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="o_arrow3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#1565C0;" edge="1" parent="ostree_lane" source="o_commit" target="o_repo">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Update client -->
+        <mxCell id="o_phase5" value="5. UPDATE" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;fontColor=#1565C0;" vertex="1" parent="ostree_lane">
+          <mxGeometry x="10" y="480" width="80" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="o_zincati" value="Zincati" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#1565C0;fontSize=12;fontStyle=1;verticalAlign=middle;" vertex="1" parent="ostree_lane">
+          <mxGeometry x="30" y="505" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="o_cincy" value="Cincinnati" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#1565C0;fontSize=11;fontStyle=1;verticalAlign=middle;" vertex="1" parent="ostree_lane">
+          <mxGeometry x="150" y="505" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="o_update_desc" value="FCOS: Zincati asks Cincinnati which&#xa;updates are permitted, then coordinates&#xa;staging with rpm-ostree. Other&#xa;rpm-ostree hosts use their own update&#xa;controllers and policies." style="text;html=1;align=left;verticalAlign=top;fontSize=10;fontColor=#555555;" vertex="1" parent="ostree_lane">
+          <mxGeometry x="270" y="495" width="290" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="o_arrow4a" value="checks" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#1565C0;fontSize=9;fontColor=#888888;" edge="1" parent="ostree_lane" source="o_zincati" target="o_cincy">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="o_arrow4b" value="fetch via&#xa;rpm-ostree" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#1565C0;fontSize=9;fontColor=#888888;exitX=0.95;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="ostree_lane" source="o_zincati" target="o_repo">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Deploy -->
+        <mxCell id="o_phase6" value="6. DEPLOY" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;fontColor=#1565C0;" vertex="1" parent="ostree_lane">
+          <mxGeometry x="10" y="570" width="80" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="o_deploy" value="rpm-ostree" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#1565C0;fontSize=12;fontStyle=1;verticalAlign=middle;" vertex="1" parent="ostree_lane">
+          <mxGeometry x="30" y="595" width="180" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="o_deploy_desc" value="Creates a bootable deployment (tree),&#xa;not necessarily an A/B partition. Reboot&#xa;selects it; the previous deployment may&#xa;remain available for explicit recovery." style="text;html=1;align=left;verticalAlign=top;fontSize=10;fontColor=#555555;" vertex="1" parent="ostree_lane">
+          <mxGeometry x="230" y="585" width="290" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="o_arrow5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#1565C0;" edge="1" parent="ostree_lane" source="o_zincati" target="o_deploy">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- A/B deployments -->
+        <mxCell id="o_ab" value="Current deployment&#xa;(booted)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#388E3C;fontSize=10;fontStyle=0;verticalAlign=middle;" vertex="1" parent="ostree_lane">
+          <mxGeometry x="40" y="660" width="130" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="o_ab2" value="New deployment&#xa;(pending activation)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F9A825;fontSize=10;fontStyle=0;verticalAlign=middle;" vertex="1" parent="ostree_lane">
+          <mxGeometry x="190" y="660" width="140" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="o_reboot" value="reboot" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#F9A825;fontSize=9;fontColor=#888888;strokeWidth=2;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="ostree_lane" source="o_ab" target="o_ab2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="105" y="720" />
+              <mxPoint x="260" y="720" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o_rollback_label" value="Select prior deployment explicitly.&#xa;Automatic rollback is not guaranteed." style="text;html=1;align=left;verticalAlign=top;fontSize=9;fontColor=#388E3C;fontStyle=2;" vertex="1" parent="ostree_lane">
+          <mxGeometry x="350" y="660" width="210" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== RIGHT: BOOTC MODEL ==================== -->
+        <mxCell id="bootc_lane" value="Example: bootc management" style="swimlane;pointerEvents=0;html=1;startSize=35;fillColor=#E8F5E9;strokeColor=#2E7D32;fontSize=16;fontStyle=1;rounded=1;swimlaneLine=1;fontColor=#2E7D32;" vertex="1" parent="1">
+          <mxGeometry x="660" y="90" width="580" height="780" as="geometry" />
+        </mxCell>
+
+        <!-- Config -->
+        <mxCell id="b_phase1" value="1. DEFINE" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;fontColor=#2E7D32;" vertex="1" parent="bootc_lane">
+          <mxGeometry x="10" y="45" width="80" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="b_containerfile" value="Containerfile (example)" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=14;verticalAlign=middle;align=center;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=12;fontStyle=1;" vertex="1" parent="bootc_lane">
+          <mxGeometry x="30" y="70" width="220" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="b_containerfile_desc" value="A common OCI recipe, not a requirement.&#xa;Manifest-based builders can also&#xa;produce bootc-compatible OCI images." style="text;html=1;align=left;verticalAlign=top;fontSize=10;fontColor=#555555;" vertex="1" parent="bootc_lane">
+          <mxGeometry x="270" y="65" width="260" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Build -->
+        <mxCell id="b_phase2" value="2. BUILD" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;fontColor=#2E7D32;" vertex="1" parent="bootc_lane">
+          <mxGeometry x="10" y="135" width="80" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="b_podman" value="podman build /&#xa;buildah" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=12;fontStyle=1;verticalAlign=middle;" vertex="1" parent="bootc_lane">
+          <mxGeometry x="30" y="160" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="b_podman_desc" value="Use standard OCI build tools, but the&#xa;base image must follow bootc's image&#xa;contract and distribution requirements." style="text;html=1;align=left;verticalAlign=top;fontSize=10;fontColor=#555555;" vertex="1" parent="bootc_lane">
+          <mxGeometry x="230" y="155" width="260" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="b_arrow1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2E7D32;" edge="1" parent="bootc_lane" source="b_containerfile" target="b_podman">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- OCI image -->
+        <mxCell id="b_phase3" value="3. OUTPUT" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;fontColor=#2E7D32;" vertex="1" parent="bootc_lane">
+          <mxGeometry x="10" y="225" width="80" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="b_oci" value="OCI Container Image" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=12;fontStyle=1;verticalAlign=middle;size=12;" vertex="1" parent="bootc_lane">
+          <mxGeometry x="30" y="250" width="180" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="b_oci_desc" value="A bootc-compatible OS image with the&#xa;kernel and required boot integration.&#xa;The image contract includes the&#xa;containers.bootc=1 compatibility label." style="text;html=1;align=left;verticalAlign=top;fontSize=10;fontColor=#555555;" vertex="1" parent="bootc_lane">
+          <mxGeometry x="230" y="245" width="290" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="b_arrow2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2E7D32;" edge="1" parent="bootc_lane" source="b_podman" target="b_oci">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Custom images -->
+        <mxCell id="b_custom" value="Custom Images" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=11;fontStyle=1;verticalAlign=middle;" vertex="1" parent="bootc_lane">
+          <mxGeometry x="300" y="320" width="130" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="b_custom_desc" value="FROM a compatible base image&#xa;Use its package-build guidance" style="text;html=1;align=center;verticalAlign=top;fontSize=9;fontColor=#555555;fontStyle=2;" vertex="1" parent="bootc_lane">
+          <mxGeometry x="290" y="355" width="160" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="b_arrow2b" value="derive" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2E7D32;dashed=1;fontSize=9;fontColor=#888888;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="bootc_lane" source="b_oci" target="b_custom">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="210" y="337.5" /></Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Distribute -->
+        <mxCell id="b_phase4" value="4. DISTRIBUTE" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;fontColor=#2E7D32;" vertex="1" parent="bootc_lane">
+          <mxGeometry x="10" y="385" width="120" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="b_registry" value="Container Registry&#xa;(quay.io, Docker Hub, etc.)" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=11;fontStyle=1;verticalAlign=middle;size=12;" vertex="1" parent="bootc_lane">
+          <mxGeometry x="30" y="410" width="220" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="b_registry_desc" value="OCI image source, such as a registry.&#xa;No separate OSTree server is needed&#xa;for this image transport." style="text;html=1;align=left;verticalAlign=top;fontSize=10;fontColor=#555555;" vertex="1" parent="bootc_lane">
+          <mxGeometry x="270" y="410" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="b_arrow3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2E7D32;" edge="1" parent="bootc_lane" source="b_oci" target="b_registry">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Update client -->
+        <mxCell id="b_phase5" value="5. UPDATE" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;fontColor=#2E7D32;" vertex="1" parent="bootc_lane">
+          <mxGeometry x="10" y="480" width="80" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="b_bootc_cmd" value="bootc upgrade" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=12;fontStyle=1;verticalAlign=middle;" vertex="1" parent="bootc_lane">
+          <mxGeometry x="30" y="505" width="180" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="b_update_desc" value="Pulls the tracked OCI image and stages&#xa;an update. Automatic checks are a&#xa;separate policy; upstream provides an&#xa;optional service/timer for distributions." style="text;html=1;align=left;verticalAlign=top;fontSize=10;fontColor=#555555;" vertex="1" parent="bootc_lane">
+          <mxGeometry x="230" y="495" width="280" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="b_arrow4" value="pulls image" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2E7D32;fontSize=9;fontColor=#888888;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="bootc_lane" source="b_bootc_cmd" target="b_registry">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Deploy -->
+        <mxCell id="b_phase6" value="6. DEPLOY" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;fontColor=#2E7D32;" vertex="1" parent="bootc_lane">
+          <mxGeometry x="10" y="570" width="80" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="b_deploy" value="OSTree default /&#xa;composefs backend" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=12;fontStyle=1;verticalAlign=middle;" vertex="1" parent="bootc_lane">
+          <mxGeometry x="30" y="595" width="180" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="b_deploy_desc" value="OSTree is the default backend; bootc&#xa;also supports composefs. Deployments&#xa;are staged for activation, but need not&#xa;map to separate A/B partitions." style="text;html=1;align=left;verticalAlign=top;fontSize=10;fontColor=#555555;" vertex="1" parent="bootc_lane">
+          <mxGeometry x="230" y="585" width="280" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="b_arrow5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2E7D32;" edge="1" parent="bootc_lane" source="b_bootc_cmd" target="b_deploy">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- A/B deployments (same!) -->
+        <mxCell id="b_ab" value="Current deployment&#xa;(booted)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#388E3C;fontSize=10;fontStyle=0;verticalAlign=middle;" vertex="1" parent="bootc_lane">
+          <mxGeometry x="40" y="660" width="130" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="b_ab2" value="New deployment&#xa;(pending activation)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F9A825;fontSize=10;fontStyle=0;verticalAlign=middle;" vertex="1" parent="bootc_lane">
+          <mxGeometry x="190" y="660" width="140" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="b_reboot" value="reboot" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#F9A825;fontSize=9;fontColor=#888888;strokeWidth=2;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="bootc_lane" source="b_ab" target="b_ab2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="105" y="720" />
+              <mxPoint x="260" y="720" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="b_same_label" value="Select prior deployment explicitly.&#xa;Automatic rollback is not guaranteed." style="text;html=1;align=left;verticalAlign=top;fontSize=9;fontColor=#388E3C;fontStyle=2;" vertex="1" parent="bootc_lane">
+          <mxGeometry x="350" y="660" width="210" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== CENTER: SHARED COMPONENTS ==================== -->
+        <mxCell id="shared_title" value="Related mechanisms (not one universal boot sequence)" style="text;html=1;align=center;verticalAlign=middle;fontSize=14;fontStyle=1;fontColor=#E65100;" vertex="1" parent="1">
+          <mxGeometry x="200" y="900" width="880" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Shared components row -->
+        <mxCell id="shared_bg" value="" style="rounded=1;container=1;pointerEvents=0;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=2;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="50" y="940" width="1170" height="160" as="geometry" />
+        </mxCell>
+
+        <!-- Boot sequence -->
+        <mxCell id="s_firmware" value="UEFI/BIOS&#xa;Firmware" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#E65100;fontSize=10;fontStyle=1;verticalAlign=middle;" vertex="1" parent="shared_bg">
+          <mxGeometry x="20" y="20" width="100" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="s_grub" value="GRUB2&#xa;Bootloader" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#E65100;fontSize=10;fontStyle=1;verticalAlign=middle;" vertex="1" parent="shared_bg">
+          <mxGeometry x="150" y="20" width="100" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="s_bootupd" value="bootupd&#xa;(bootloader updates)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCC80;strokeColor=#E65100;fontSize=10;fontStyle=1;verticalAlign=middle;strokeWidth=2;" vertex="1" parent="shared_bg">
+          <mxGeometry x="150" y="90" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="s_initramfs" value="Initramfs&#xa;(dracut)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#E65100;fontSize=10;fontStyle=1;verticalAlign=middle;" vertex="1" parent="shared_bg">
+          <mxGeometry x="280" y="20" width="100" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="s_ignition" value="Ignition&#xa;(when used)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#E65100;fontSize=10;fontStyle=1;verticalAlign=middle;" vertex="1" parent="shared_bg">
+          <mxGeometry x="410" y="20" width="100" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="s_ostree" value="Deployment backend&#xa;(varies by image)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#E65100;fontSize=10;fontStyle=1;verticalAlign=middle;" vertex="1" parent="shared_bg">
+          <mxGeometry x="540" y="20" width="110" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="s_afterburn" value="Afterburn&#xa;Platform-specific; timing varies" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#E65100;fontSize=10;fontStyle=1;verticalAlign=middle;" vertex="1" parent="shared_bg">
+          <mxGeometry x="520" y="80" width="280" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="s_systemd" value="systemd&#xa;(PID 1)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#E65100;fontSize=10;fontStyle=1;verticalAlign=middle;" vertex="1" parent="shared_bg">
+          <mxGeometry x="820" y="20" width="100" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="s_immutable" value="/usr normally read-only&#xa;/etc and /var writable&#xa;Not tamper-proof alone" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#E65100;fontSize=10;fontStyle=1;verticalAlign=middle;" vertex="1" parent="shared_bg">
+          <mxGeometry x="950" y="20" width="180" height="45" as="geometry" />
+        </mxCell>
+
+        <!-- Boot sequence arrows -->
+        <mxCell id="sa1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#E65100;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="shared_bg" source="s_firmware" target="s_grub">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sa2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#E65100;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="shared_bg" source="s_grub" target="s_initramfs">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sa3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#E65100;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="shared_bg" source="s_initramfs" target="s_ignition">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sa4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#E65100;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="shared_bg" source="s_ignition" target="s_ostree">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sa5" value="some initrd inputs" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#E65100;dashed=1;fontSize=8;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="shared_bg" source="s_afterburn" target="s_initramfs">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sa6" value="applicable services" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#E65100;dashed=1;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="shared_bg" source="s_systemd" target="s_afterburn">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sa_bootupd" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#E65100;dashed=1;exitX=0.5;exitY=0;entryX=0.5;entryY=1;" edge="1" parent="shared_bg" source="s_bootupd" target="s_grub">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sa7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#E65100;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="shared_bg" source="s_ostree" target="s_systemd">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sa8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#E65100;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="shared_bg" source="s_systemd" target="s_immutable">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Shared boot label -->
+
+        <!-- ==================== BOTTOM: KEY DIFFERENCES TABLE ==================== -->
+        <mxCell id="table_title" value="Key Differences at a Glance" style="text;html=1;align=center;verticalAlign=middle;fontSize=16;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="400" y="1120" width="280" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Table header -->
+        <mxCell id="th1" value="Aspect" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#424242;strokeColor=#212121;fontColor=#ffffff;fontSize=11;fontStyle=1;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="150" y="1160" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="th2" value="rpm-ostree" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1565C0;strokeColor=#0D47A1;fontColor=#ffffff;fontSize=11;fontStyle=1;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="330" y="1160" width="280" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="th3" value="bootc" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#2E7D32;strokeColor=#1B5E20;fontColor=#ffffff;fontSize=11;fontStyle=1;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="610" y="1160" width="280" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Row 1 -->
+        <mxCell id="r1l" value="Common recipes (overlap)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FAFAFA;strokeColor=#E0E0E0;fontSize=10;fontStyle=1;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="150" y="1190" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="r1a" value="Treefiles/manifests or OCI derivation" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#E0E0E0;fontSize=10;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="330" y="1190" width="280" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="r1b" value="Containerfiles or manifests; compatible OCI output" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#E0E0E0;fontSize=10;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="610" y="1190" width="280" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Row 2 -->
+        <mxCell id="r2l" value="Example build tools" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FAFAFA;strokeColor=#E0E0E0;fontSize=10;fontStyle=1;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="150" y="1220" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="r2a" value="COSA/rpm-ostree; OCI tools also work" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#E0E0E0;fontSize=10;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="330" y="1220" width="280" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="r2b" value="Podman/Buildah or a manifest-based builder" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#E0E0E0;fontSize=10;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="610" y="1220" width="280" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Row 3 -->
+        <mxCell id="r3l" value="Delivery mechanism" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FAFAFA;strokeColor=#E0E0E0;fontSize=10;fontStyle=1;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="150" y="1250" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="r3a" value="OSTree repo, image, or OCI transport" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#E0E0E0;fontSize=10;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="330" y="1250" width="280" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="r3b" value="OCI registry / image source" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#E0E0E0;fontSize=10;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="610" y="1250" width="280" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Row 4 -->
+        <mxCell id="r4l" value="Update agent" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FAFAFA;strokeColor=#E0E0E0;fontSize=10;fontStyle=1;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="150" y="1280" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="r4a" value="FCOS: Zincati + Cincinnati; others vary" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#E0E0E0;fontSize=10;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="330" y="1280" width="280" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="r4b" value="bootc upgrade; auto-update service is optional" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#E0E0E0;fontSize=10;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="610" y="1280" width="280" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Row 5 -->
+        <mxCell id="r5l" value="Custom OS images" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FAFAFA;strokeColor=#E0E0E0;fontSize=10;fontStyle=1;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="150" y="1310" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="r5a" value="RPM layering, composition, or OCI derivation" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#E0E0E0;fontSize=10;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="330" y="1310" width="280" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="r5b" value="Derive and publish a compatible OCI image" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#E0E0E0;fontSize=10;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="610" y="1310" width="280" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Row 6 -->
+        <mxCell id="r6l" value="On-disk format" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FAFAFA;strokeColor=#E0E0E0;fontSize=10;fontStyle=1;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="150" y="1340" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="r6a" value="OSTree deployments; rollback is explicit" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#E0E0E0;fontSize=10;fontStyle=1;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="330" y="1340" width="280" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="r6b" value="OSTree default; composefs also supported" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#E0E0E0;fontSize=10;fontStyle=1;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="610" y="1340" width="280" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="r6_same" value="Not identical" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=1;fontColor=#E65100;" vertex="1" parent="1">
+          <mxGeometry x="900" y="1340" width="130" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Transition note -->
+        <mxCell id="transition" value="Example stable FCOS image 44.20260913.3.2 is bootc-compatible; default updates still use Zincati/rpm-ostree.&#xa;Build recipes can overlap. bootc defaults to OSTree and also supports composefs; MCO owns RHCOS/SCOS rollouts.&#xa;Sources and example digest: rpm-ostree-vs-bootc.md." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1D5E7;strokeColor=#9673a6;fontSize=11;verticalAlign=middle;align=center;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry x="150" y="1380" width="920" height="70" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

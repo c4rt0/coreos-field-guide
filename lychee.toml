@@ -1,0 +1,16 @@
+# Link checker configuration. See https://lychee.cli.rs/
+
+max_retries = 3
+timeout = 20
+
+# Some vendor sites answer automated requests with 403 or rate limiting even
+# when the page exists. Treat those as reachable rather than as broken links.
+accept = ["200..=299", "403", "429", "503"]
+
+# Example addresses in prose are not real endpoints.
+exclude_private = true
+exclude_loopback = true
+exclude = [
+  "^https?://(www\\.)?example\\.(com|org)",
+  "^https://quay\\.io/example/",
+]

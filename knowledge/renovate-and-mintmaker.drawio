@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="drawio" compressed="false">
+  <diagram id="renovate-mintmaker" name="MintMaker and Renovate Update Flow">
+    <mxGraphModel dx="900" dy="820" grid="1" gridSize="10" guides="1" connect="1" arrows="1" page="1" pageScale="1" pageWidth="900" pageHeight="820" background="#ffffff">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="sched" value="MintMaker&#xa;schedules a run" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=16;fontColor=#172b4d;spacing=8;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="310" y="30" width="280" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="check" value="Renovate checks&#xa;configured dependencies" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=16;fontColor=#172b4d;spacing=8;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="310" y="150" width="280" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="rjson" value="renovate.json&#xa;(repository rules)" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=14;fontColor=#6d4c00;spacing=8;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="40" y="130" width="210" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="mconf" value="MintMaker shared&#xa;config and presets" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=14;fontColor=#6d4c00;spacing=8;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="650" y="130" width="210" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="detect" value="Update&#xa;detected?" style="rhombus;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=16;fontColor=#6d4c00;spacing=4;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="370" y="270" width="160" height="100" as="geometry" />
+        </mxCell>
+
+        <mxCell id="noupdate" value="No update&#xa;proposed" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=16;fontColor=#67000d;spacing=8;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="650" y="290" width="210" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="branch" value="Renovate creates&#xa;branch with changes" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=16;fontColor=#263b23;spacing=8;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="310" y="430" width="280" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="post" value="Post-upgrade task runs&#xa;(e.g. update_artifacts_lockfile)" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=16;fontColor=#263b23;spacing=8;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="310" y="530" width="280" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="pr" value="Renovate proposes&#xa;pull request" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=16;fontColor=#263b23;spacing=8;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="310" y="630" width="280" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="ci" value="Repository CI&#xa;and review" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=16;fontColor=#263b23;spacing=8;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="310" y="730" width="280" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Edges -->
+        <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="sched" target="check">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e-rjson" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#d6b656;strokeWidth=2;endArrow=open;endFill=0;dashed=1;" edge="1" parent="1" source="rjson" target="check">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e-mconf" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#d6b656;strokeWidth=2;endArrow=open;endFill=0;dashed=1;" edge="1" parent="1" source="mconf" target="check">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="check" target="detect">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e-no" value="No" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#b85450;strokeWidth=2;endArrow=block;endFill=1;fontFamily=Arial;fontSize=14;" edge="1" parent="1" source="detect" target="noupdate">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e-yes" value="Yes" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#82b366;strokeWidth=2;endArrow=block;endFill=1;fontFamily=Arial;fontSize=14;" edge="1" parent="1" source="detect" target="branch">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="branch" target="post">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e5" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="post" target="pr">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e6" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="pr" target="ci">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

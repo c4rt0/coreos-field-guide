@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="drawio" compressed="false">
+  <diagram id="coreos-ecosystem" name="CoreOS Ecosystem">
+    <mxGraphModel dx="1100" dy="1200" grid="1" gridSize="10" guides="1" connect="1" arrows="1" page="1" pageScale="1" pageWidth="1100" pageHeight="1200" background="#ffffff">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Section 1: Configuration and CI -->
+        <mxCell id="s1" value="1. Configuration and CI projects" style="swimlane;startSize=35;horizontal=1;rounded=1;html=1;whiteSpace=wrap;container=1;collapsible=0;fontFamily=Arial;fontSize=18;fontStyle=1;align=left;spacingLeft=15;fillColor=#f5f5f5;swimlaneFillColor=#ffffff;strokeColor=#666666;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="20" y="20" width="1060" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="fcc" value="fedora-coreos-config&#xa;FCOS manifests, overlays, image settings" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=14;fontColor=#172b4d;spacing=8;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" vertex="1" parent="s1">
+          <mxGeometry x="20" y="55" width="290" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="rhc" value="rhel-coreos-config / openshift-os&#xa;RHCOS packages and image configuration" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=14;fontColor=#172b4d;spacing=8;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" vertex="1" parent="s1">
+          <mxGeometry x="370" y="55" width="300" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="ci" value="coreos-ci&#xa;Jenkins infrastructure" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=14;fontColor=#263b23;spacing=8;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;" vertex="1" parent="s1">
+          <mxGeometry x="730" y="55" width="200" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- Section 2: Build, test, publish -->
+        <mxCell id="s2" value="2. Compose, test, and publish" style="swimlane;startSize=35;horizontal=1;rounded=1;html=1;whiteSpace=wrap;container=1;collapsible=0;fontFamily=Arial;fontSize=18;fontStyle=1;align=left;spacingLeft=15;fillColor=#f5f5f5;swimlaneFillColor=#ffffff;strokeColor=#666666;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="20" y="220" width="1060" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="cosa" value="COSA&#xa;Release-specific image builds" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=14;fontColor=#263b23;spacing=8;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;" vertex="1" parent="s2">
+          <mxGeometry x="20" y="55" width="280" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="kola" value="Kola and Testing Farm&#xa;Boot and test candidates" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=14;fontColor=#4b3500;spacing=8;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;" vertex="1" parent="s2">
+          <mxGeometry x="390" y="55" width="260" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="artifacts" value="Published FCOS / RHCOS / SCOS artifacts&#xa;OCI images, OSTree, disk/cloud images" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=14;fontColor=#3b1f54;spacing=8;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;" vertex="1" parent="s2">
+          <mxGeometry x="740" y="55" width="290" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="e_cosa_kola" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="s2" source="cosa" target="kola"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_kola_art" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="s2" source="kola" target="artifacts"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <!-- Section 3: Install and first boot -->
+        <mxCell id="s3" value="3. Install and first boot" style="swimlane;startSize=35;horizontal=1;rounded=1;html=1;whiteSpace=wrap;container=1;collapsible=0;fontFamily=Arial;fontSize=18;fontStyle=1;align=left;spacingLeft=15;fillColor=#f5f5f5;swimlaneFillColor=#ffffff;strokeColor=#666666;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="20" y="420" width="1060" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="installer" value="coreos-installer&#xa;Writes disk image to&#xa;bare metal or VM" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=14;fontColor=#172b4d;spacing=8;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" vertex="1" parent="s3">
+          <mxGeometry x="20" y="55" width="200" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="butane" value="Butane&#xa;YAML to Ignition JSON" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=14;fontColor=#4b3500;spacing=8;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;" vertex="1" parent="s3">
+          <mxGeometry x="280" y="55" width="200" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="runtime" value="Runtime components&#xa;Ignition, rpm-ostree,&#xa;Afterburn, bootupd" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=14;fontColor=#263b23;spacing=8;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;" vertex="1" parent="s3">
+          <mxGeometry x="540" y="55" width="230" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="machine" value="Running CoreOS node&#xa;Read-only OS, writable /etc /var" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=14;fontColor=#3b1f54;spacing=8;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;" vertex="1" parent="s3">
+          <mxGeometry x="830" y="55" width="210" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="e_but_rt" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="s3" source="butane" target="runtime"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_rt_m" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="s3" source="runtime" target="machine"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <!-- Section 4: Updates -->
+        <mxCell id="s4" value="4. Atomic runtime updates" style="swimlane;startSize=35;horizontal=1;rounded=1;html=1;whiteSpace=wrap;container=1;collapsible=0;fontFamily=Arial;fontSize=18;fontStyle=1;align=left;spacingLeft=15;fillColor=#f5f5f5;swimlaneFillColor=#ffffff;strokeColor=#666666;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="20" y="640" width="1060" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="fcos_path" value="FCOS path" style="text;html=1;fontFamily=Arial;fontSize=14;fontStyle=3;fontColor=#666666;align=center;" vertex="1" parent="s4">
+          <mxGeometry x="20" y="45" width="500" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="zincati" value="Zincati&#xa;FCOS update coordinator" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=14;fontColor=#172b4d;spacing=8;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" vertex="1" parent="s4">
+          <mxGeometry x="20" y="75" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cincinnati" value="Cincinnati + OCI transport&#xa;Update graph and payloads" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=14;fontColor=#263b23;spacing=8;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;" vertex="1" parent="s4">
+          <mxGeometry x="290" y="75" width="240" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="rhcos_path" value="RHCOS / SCOS path" style="text;html=1;fontFamily=Arial;fontSize=14;fontStyle=3;fontColor=#666666;align=center;" vertex="1" parent="s4">
+          <mxGeometry x="560" y="45" width="480" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="mco" value="Machine Config Operator&#xa;OpenShift / OKD managed" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=14;fontColor=#4b3500;spacing=8;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=2;" vertex="1" parent="s4">
+          <mxGeometry x="570" y="75" width="230" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="stage" value="Node stages OS/config changes&#xa;Reboot as required" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=14;fontColor=#4b3500;spacing=8;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=2;" vertex="1" parent="s4">
+          <mxGeometry x="840" y="75" width="200" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="nextboot" value="Next boot: updated CoreOS node" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=16;fontColor=#3b1f54;spacing=8;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;" vertex="1" parent="s4">
+          <mxGeometry x="330" y="190" width="400" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_z_c" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="s4" source="zincati" target="cincinnati"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_c_nb" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="s4" source="cincinnati" target="nextboot"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_mco_s" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="s4" source="mco" target="stage"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_s_nb" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="s4" source="stage" target="nextboot"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <!-- Cross-section edges -->
+        <mxCell id="x1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="fcc" target="cosa"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="x2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="rhc" target="cosa"><mxGeometry relative="1" as="geometry" /></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

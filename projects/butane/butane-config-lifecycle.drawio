@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="drawio" compressed="false">
+  <diagram id="butane-lifecycle" name="Butane Configuration Lifecycle">
+    <mxGraphModel dx="1000" dy="550" grid="1" gridSize="10" guides="1" connect="1" arrows="1" page="1" pageScale="1" pageWidth="1000" pageHeight="550" background="#ffffff">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="2" value="Workstation / CI: no target-node changes" style="swimlane;startSize=40;horizontal=1;rounded=1;html=1;whiteSpace=wrap;container=1;pointerEvents=0;collapsible=0;fontFamily=Arial;fontSize=22;fontStyle=1;align=left;spacingLeft=20;fillColor=#f5f5f5;swimlaneFillColor=#ffffff;strokeColor=#666666;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="20" y="20" width="960" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="3" value="1. Butane YAML (.bu)&#xa;variant + version" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=22;fontColor=#172b4d;spacing=10;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" vertex="1" parent="2">
+          <mxGeometry x="30" y="70" width="260" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="4" value="2. Butane command&#xa;validate + transpile" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=22;fontColor=#172b4d;spacing=10;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" vertex="1" parent="2">
+          <mxGeometry x="350" y="70" width="260" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="5" value="3. Ignition JSON (.ign)&#xa;inspect + validate" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=22;fontColor=#263b23;spacing=10;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;" vertex="1" parent="2">
+          <mxGeometry x="670" y="70" width="260" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="6" value="Target machine: first-boot provisioning" style="swimlane;startSize=40;horizontal=1;rounded=1;html=1;whiteSpace=wrap;container=1;pointerEvents=0;collapsible=0;fontFamily=Arial;fontSize=22;fontStyle=1;align=left;spacingLeft=20;fillColor=#f5f5f5;swimlaneFillColor=#ffffff;strokeColor=#666666;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="20" y="300" width="960" height="230" as="geometry" />
+        </mxCell>
+        <mxCell id="7" value="6. Provisioned host&#xa;files / users / units" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=22;fontColor=#263b23;spacing=10;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;" vertex="1" parent="6">
+          <mxGeometry x="30" y="70" width="260" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="8" value="5. Ignition&#xa;initramfs, first boot" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=22;fontColor=#172b4d;spacing=10;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" vertex="1" parent="6">
+          <mxGeometry x="350" y="70" width="260" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="9" value="4. Platform delivery&#xa;user-data / installer&#xa;or QEMU fw_cfg" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=22;fontColor=#4b3500;spacing=10;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=2;" vertex="1" parent="6">
+          <mxGeometry x="670" y="70" width="260" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="10" value="Butane compiles. Ignition applies. Later management is separate." style="text;html=1;whiteSpace=wrap;fontFamily=Arial;fontSize=20;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="6">
+          <mxGeometry x="30" y="190" width="900" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="11" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="2" source="3" target="4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="12" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="2" source="4" target="5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="13" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="5" target="9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="14" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="6" source="9" target="8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="15" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="6" source="8" target="7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

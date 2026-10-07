@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="drawio" compressed="false">
+  <diagram id="build-node-image" name="Node-Image Build and Test Flow">
+    <mxGraphModel dx="900" dy="960" grid="1" gridSize="10" guides="1" connect="1" arrows="1" page="1" pageScale="1" pageWidth="900" pageHeight="960" background="#ffffff">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Normal build path -->
+        <mxCell id="lane-normal" value="Normal build path" style="swimlane;startSize=35;horizontal=1;rounded=1;html=1;whiteSpace=wrap;container=1;pointerEvents=0;collapsible=0;fontFamily=Arial;fontSize=20;fontStyle=1;align=left;spacingLeft=20;fillColor=#f5f5f5;swimlaneFillColor=#ffffff;strokeColor=#666666;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="30" y="20" width="520" height="900" as="geometry" />
+        </mxCell>
+
+        <mxCell id="init" value="1. Init&#xa;Assemble extra yum repo file" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=16;fontColor=#6d4c00;spacing=8;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;dashed=1;" vertex="1" parent="lane-normal">
+          <mxGeometry x="110" y="55" width="300" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="init-note" value="Only if stream defines&#xa;extra yum repositories" style="text;html=1;fontFamily=Arial;fontSize=12;fontColor=#999999;fontStyle=2;align=left;" vertex="1" parent="lane-normal">
+          <mxGeometry x="110" y="115" width="200" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="buildnode" value="2. Build Node Image&#xa;Per-arch builds, push to staging" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=16;fontColor=#172b4d;spacing=8;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" vertex="1" parent="lane-normal">
+          <mxGeometry x="110" y="175" width="300" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="buildext" value="3. Build Extensions Image&#xa;On top of node image" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=16;fontColor=#172b4d;spacing=8;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" vertex="1" parent="lane-normal">
+          <mxGeometry x="110" y="295" width="300" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="tests" value="4. Run Tests&#xa;cosa init, kola run per arch" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=16;fontColor=#263b23;spacing=8;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;" vertex="1" parent="lane-normal">
+          <mxGeometry x="110" y="415" width="300" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="brew" value="5. Brew Upload&#xa;Extract metadata, upload" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=16;fontColor=#263b23;spacing=8;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;" vertex="1" parent="lane-normal">
+          <mxGeometry x="110" y="535" width="300" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="release" value="6. Release Manifests&#xa;Extensions first, then node image" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=16;fontColor=#4a235a;spacing=8;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;" vertex="1" parent="lane-normal">
+          <mxGeometry x="110" y="655" width="300" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="done" value="Release complete&#xa;Node image arrival is the signal" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=16;fontColor=#4a235a;spacing=8;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;" vertex="1" parent="lane-normal">
+          <mxGeometry x="110" y="775" width="300" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Normal path edges -->
+        <mxCell id="en1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="lane-normal" source="init" target="buildnode">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="en2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="lane-normal" source="buildnode" target="buildext">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="en3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="lane-normal" source="buildext" target="tests">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="en4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="lane-normal" source="tests" target="brew">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="en5" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="lane-normal" source="brew" target="release">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="en6" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="lane-normal" source="release" target="done">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Skip-build path -->
+        <mxCell id="lane-skip" value="Skip-build path" style="swimlane;startSize=35;horizontal=1;rounded=1;html=1;whiteSpace=wrap;container=1;pointerEvents=0;collapsible=0;fontFamily=Arial;fontSize=20;fontStyle=1;align=left;spacingLeft=20;fillColor=#f5f5f5;swimlaneFillColor=#ffffff;strokeColor=#666666;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="600" y="20" width="270" height="900" as="geometry" />
+        </mxCell>
+
+        <mxCell id="skip-input" value="Prebuilt digests&#xa;NODE_IMAGE +&#xa;EXTENSIONS_IMAGE" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=16;fontColor=#6d4c00;spacing=8;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;" vertex="1" parent="lane-skip">
+          <mxGeometry x="20" y="55" width="230" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="skip-note" value="Both required,&#xa;must include @sha256:" style="text;html=1;fontFamily=Arial;fontSize=12;fontColor=#999999;fontStyle=2;align=left;" vertex="1" parent="lane-skip">
+          <mxGeometry x="20" y="135" width="200" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="skip-tests" value="Run Tests" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=16;fontColor=#263b23;spacing=8;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;" vertex="1" parent="lane-skip">
+          <mxGeometry x="20" y="415" width="230" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="skip-brew" value="Brew Upload" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=16;fontColor=#263b23;spacing=8;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;" vertex="1" parent="lane-skip">
+          <mxGeometry x="20" y="535" width="230" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Skip-build edges -->
+        <mxCell id="es1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;dashed=1;" edge="1" parent="lane-skip" source="skip-input" target="skip-tests">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="es2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="lane-skip" source="skip-tests" target="skip-brew">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="drawio" compressed="false">
+  <diagram id="bump-lockfile-comparison" name="FCOS vs RHCOS bump-lockfile">
+    <mxGraphModel dx="1200" dy="900" grid="1" gridSize="10" guides="1" connect="1" arrows="1" page="1" pageScale="1" pageWidth="1200" pageHeight="900" background="#ffffff">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Title -->
+        <mxCell id="title" value="bump-lockfile: FCOS vs RHCOS" style="text;html=1;whiteSpace=wrap;fontFamily=Arial;fontSize=24;fontStyle=1;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="300" y="10" width="600" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- FCOS swimlane -->
+        <mxCell id="fcos-lane" value="FCOS (today - working)" style="swimlane;startSize=40;horizontal=1;rounded=1;html=1;whiteSpace=wrap;container=1;pointerEvents=0;collapsible=0;fontFamily=Arial;fontSize=20;fontStyle=1;align=left;spacingLeft=20;fillColor=#dae8fc;swimlaneFillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="20" y="70" width="560" height="800" as="geometry" />
+        </mxCell>
+
+        <mxCell id="fcos-trigger" value="Daily cron (04:00 UTC)&#xa;bump-lockfiles.Jenkinsfile" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=16;fontColor=#172b4d;spacing=8;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;" vertex="1" parent="fcos-lane">
+          <mxGeometry x="30" y="60" width="500" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="fcos-init" value="cosa init --branch testing-devel&#xa;Repo: coreos/fedora-coreos-config&#xa;Branch = stream name" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=16;fontColor=#172b4d;spacing=8;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" vertex="1" parent="fcos-lane">
+          <mxGeometry x="30" y="150" width="500" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="fcos-delete" value="Delete manifest-lock.*.json (repo root)&#xa;cosa build --force (public Fedora repos)" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=16;fontColor=#172b4d;spacing=8;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" vertex="1" parent="fcos-lane">
+          <mxGeometry x="30" y="260" width="500" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="fcos-capture" value="Capture manifest-lock.generated.${arch}.json&#xa;for each arch (x86_64, aarch64, ppc64le, s390x)" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=16;fontColor=#172b4d;spacing=8;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" vertex="1" parent="fcos-lane">
+          <mxGeometry x="30" y="360" width="500" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="fcos-test" value="Test: osbuild, kola, testiso&#xa;per arch in parallel" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=16;fontColor=#4b3500;spacing=8;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=2;" vertex="1" parent="fcos-lane">
+          <mxGeometry x="30" y="460" width="500" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="fcos-push" value="git push to testing-devel branch&#xa;Bump .tekton/trigger" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=16;fontColor=#263b23;spacing=8;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;" vertex="1" parent="fcos-lane">
+          <mxGeometry x="30" y="550" width="500" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="fcos-layout" value="Lockfile layout:&#xa;testing-devel branch root/&#xa;  manifest-lock.x86_64.json&#xa;  manifest-lock.aarch64.json&#xa;  manifest-lock.ppc64le.json&#xa;  manifest-lock.s390x.json" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Courier New;fontSize=14;fontColor=#333333;spacing=8;fillColor=#f5f5f5;strokeColor=#999999;strokeWidth=1;align=left;" vertex="1" parent="fcos-lane">
+          <mxGeometry x="30" y="650" width="500" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- Arrows in FCOS lane -->
+        <mxCell id="fcos-e1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="fcos-lane" source="fcos-trigger" target="fcos-init">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fcos-e2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="fcos-lane" source="fcos-init" target="fcos-delete">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fcos-e3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="fcos-lane" source="fcos-delete" target="fcos-capture">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fcos-e4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="fcos-lane" source="fcos-capture" target="fcos-test">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fcos-e5" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="fcos-lane" source="fcos-test" target="fcos-push">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- RHCOS swimlane -->
+        <mxCell id="rhcos-lane" value="RHCOS" style="swimlane;startSize=40;horizontal=1;rounded=1;html=1;whiteSpace=wrap;container=1;pointerEvents=0;collapsible=0;fontFamily=Arial;fontSize=20;fontStyle=1;align=left;spacingLeft=20;fillColor=#f8cecc;swimlaneFillColor=#ffffff;strokeColor=#b85450;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="620" y="70" width="560" height="800" as="geometry" />
+        </mxCell>
+
+        <mxCell id="rhcos-trigger" value="Daily cron (04:00 UTC)&#xa;Same bump-lockfiles.Jenkinsfile" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=16;fontColor=#172b4d;spacing=8;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;" vertex="1" parent="rhcos-lane">
+          <mxGeometry x="30" y="60" width="500" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="rhcos-init" value="cosa init --branch main --variant rhcos-10.2&#xa;Repo: coreos/rhel-coreos-config&#xa;Branch = main (from source_config_ref)" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=16;fontColor=#67000d;spacing=8;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=2;" vertex="1" parent="rhcos-lane">
+          <mxGeometry x="30" y="150" width="500" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="rhcos-delete" value="Delete lockfiles/rhel-10.2/manifest-lock.*.json&#xa;cosa build --force (RHEL repos, needs auth)" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=16;fontColor=#67000d;spacing=8;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=2;" vertex="1" parent="rhcos-lane">
+          <mxGeometry x="30" y="260" width="500" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="rhcos-capture" value="Capture manifest-lock.generated.${arch}.json&#xa;into lockfiles/rhel-10.2/ for each arch" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=16;fontColor=#67000d;spacing=8;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=2;" vertex="1" parent="rhcos-lane">
+          <mxGeometry x="30" y="360" width="500" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="rhcos-test" value="Test: osbuild, kola&#xa;per arch in parallel" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=16;fontColor=#4b3500;spacing=8;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=2;" vertex="1" parent="rhcos-lane">
+          <mxGeometry x="30" y="460" width="500" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="rhcos-push" value="git push to main branch&#xa;Bump .tekton/trigger (triggers Konflux build)" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=16;fontColor=#263b23;spacing=8;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;" vertex="1" parent="rhcos-lane">
+          <mxGeometry x="30" y="550" width="500" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="rhcos-layout" value="Lockfile layout:&#xa;main branch/&#xa;  lockfiles/&#xa;    rhel-9.8/&#xa;      manifest-lock.x86_64.json&#xa;    rhel-10.2/&#xa;      manifest-lock.x86_64.json" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Courier New;fontSize=14;fontColor=#333333;spacing=8;fillColor=#f5f5f5;strokeColor=#999999;strokeWidth=1;align=left;" vertex="1" parent="rhcos-lane">
+          <mxGeometry x="30" y="650" width="500" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- Arrows in RHCOS lane -->
+        <mxCell id="rhcos-e1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="rhcos-lane" source="rhcos-trigger" target="rhcos-init">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rhcos-e2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="rhcos-lane" source="rhcos-init" target="rhcos-delete">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rhcos-e3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="rhcos-lane" source="rhcos-delete" target="rhcos-capture">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rhcos-e4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="rhcos-lane" source="rhcos-capture" target="rhcos-test">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rhcos-e5" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="rhcos-lane" source="rhcos-test" target="rhcos-push">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

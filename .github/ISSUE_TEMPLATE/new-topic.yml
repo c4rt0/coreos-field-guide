@@ -1,0 +1,30 @@
+name: New topic
+description: Suggest a project, workflow, or concept the guide should cover.
+labels: [new-topic]
+body:
+  - type: input
+    id: topic
+    attributes:
+      label: Topic
+      description: Project, workflow, or concept, for example a CoreOS repository or a CI system.
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why it belongs here
+      description: Which CoreOS work it helps with, and where it fits in the existing guide.
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Public sources
+      description: Upstream repositories, documentation, or talks a page could be based on.
+  - type: checkboxes
+    id: public
+    attributes:
+      label: Public information only
+      options:
+        - label: This issue contains no internal, customer, or private tracker information.
+          required: true

@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="drawio" version="30.0.4">
+  <diagram name="RPM Package Pipeline" id="rpm-pipeline">
+    <!-- Conceptual release flow, not a guarantee that every package has TMT gating.
+         Public source: https://github.com/coreos/bootupd/tree/main/tests/tmt
+         Policy guide: https://docs.fedoraproject.org/en-US/ci/gating/ -->
+    <mxGraphModel dx="1800" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Title -->
+        <mxCell id="title" value="How Code Becomes a Package in Fedora / RHEL" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=22;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="300" y="10" width="580" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- STAGE 1: Developer -->
+        <mxCell id="dev" value="Developer" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="50" y="140" width="40" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="dev_desc" value="Writes code&#xa;(Rust, Go, C...)" style="text;html=1;align=center;verticalAlign=top;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=11;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="20" y="230" width="100" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- STAGE 2: Upstream Repo -->
+        <mxCell id="upstream" value="Upstream Repo&#xa;(GitHub)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;fontStyle=1;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="170" y="130" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="upstream_desc" value="github.com/coreos/bootupd&#xa;The open source code" style="text;html=1;align=center;verticalAlign=top;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=11;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="162" y="210" width="180" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Arrow: Dev -> Upstream -->
+        <mxCell id="e1" value="push" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;fontColor=#666666;" edge="1" parent="1" source="dev" target="upstream">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- STAGE 3a: Fedora Packaging Repo -->
+        <mxCell id="fedora_pkg" value="Fedora Package Repo&#xa;(src.fedoraproject.org)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;fontStyle=1;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="430" y="90" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="fedora_pkg_desc" value="Contains: spec file&#xa;(the build recipe)" style="text;html=1;align=center;verticalAlign=top;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=11;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="455" y="155" width="140" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- STAGE 3b: Dist-git (RHEL) -->
+        <mxCell id="distgit" value="RHEL Dist-git&#xa;(packaging sources)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;fontStyle=1;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="430" y="220" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="distgit_desc" value="Distribution-specific recipe,&#xa;sources, patches, and test plans" style="text;html=1;align=center;verticalAlign=top;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=11;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="442" y="285" width="170" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Arrows: Upstream -> Packaging repos -->
+        <mxCell id="e2a" value="Packit bot or&#xa;maintainer" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=10;fontColor=#666666;" edge="1" parent="1" source="upstream" target="fedora_pkg">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2b" value="Developer&#xa;pushes" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=10;fontColor=#666666;" edge="1" parent="1" source="upstream" target="distgit">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Label: What is a spec file? -->
+        <mxCell id="spec_note" value="A spec file is a recipe:&#xa;what to download, how to&#xa;compile, what files to include&#xa;in the final package" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=14;verticalAlign=middle;align=center;fillColor=#FFF9C4;strokeColor=#d6b656;fontSize=11;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="430" y="340" width="190" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- STAGE 4: Build Systems -->
+        <mxCell id="build_group" value="Build System" style="swimlane;html=1;pointerEvents=0;startSize=26;fillColor=#E3F2FD;strokeColor=#6c8ebf;fontSize=13;fontStyle=1;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="700" y="80" width="180" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="koji" value="Koji&#xa;(Fedora)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;fontStyle=1;verticalAlign=middle;" vertex="1" parent="build_group">
+          <mxGeometry x="20" y="40" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="brew" value="Brew&#xa;(RHEL)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;fontStyle=1;verticalAlign=middle;" vertex="1" parent="build_group">
+          <mxGeometry x="20" y="110" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="build_output" value="Output: .rpm files" style="text;html=1;align=center;verticalAlign=top;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=11;fontColor=#666666;fontStyle=2;" vertex="1" parent="build_group">
+          <mxGeometry x="25" y="175" width="130" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Arrows: Pkg repos -> Build -->
+        <mxCell id="e3a" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="fedora_pkg" target="koji">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3b" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="distgit" target="brew">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- STAGE 5: Quality Gate -->
+        <mxCell id="gate" value="Release Policy" style="rounded=1;container=1;pointerEvents=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;fontStyle=1;verticalAlign=top;spacingTop=5;" vertex="1" parent="1">
+          <mxGeometry x="960" y="100" width="180" height="230" as="geometry" />
+        </mxCell>
+        <mxCell id="gate_bodhi" value="Bodhi / Greenwave (Fedora)&#xa;Distribution CI (RHEL)" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=10;fontColor=#555555;fontStyle=2;" vertex="1" parent="gate">
+          <mxGeometry x="10" y="40" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="gate_desc" value="Required results / waivers&#xa;per configured policy&#xa;(TMT checks when required)" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=11;fontColor=#555555;" vertex="1" parent="gate">
+          <mxGeometry x="10" y="90" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="gate_pass" value="MET" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;fontStyle=1;" vertex="1" parent="gate">
+          <mxGeometry x="10" y="150" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="gate_fail" value="NOT MET" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;fontStyle=1;" vertex="1" parent="gate">
+          <mxGeometry x="90" y="150" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="gate_fail_desc" value="Required policy&#xa;not met: promotion&#xa;is blocked" style="text;html=1;align=center;verticalAlign=top;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=10;fontColor=#b85450;fontStyle=1;" vertex="1" parent="gate">
+          <mxGeometry x="85" y="185" width="90" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Arrow: Build -> Gate -->
+        <mxCell id="e4" value=".rpm" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=11;fontColor=#666666;fontStyle=2;" edge="1" parent="1" source="build_group" target="gate">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- STAGE 6: Compose -->
+        <mxCell id="compose" value="Compose" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;fontStyle=1;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="1220" y="130" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="compose_desc" value="Selected RPMs and dependencies&#xa;form release repositories / images.&#xa;Compose adds its own validation." style="text;html=1;align=center;verticalAlign=top;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=11;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="1215" y="195" width="200" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Arrow: Gate PASS -> Compose -->
+        <mxCell id="e5" value="policy met" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#82b366;strokeWidth=2;fontSize=10;fontColor=#666666;" edge="1" parent="1" source="gate" target="compose">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- STAGE 7: Users -->
+        <mxCell id="users" value="Users" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1460" y="130" width="40" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="users_desc" value="Install via dnf,&#xa;or use as CoreOS&#xa;base image" style="text;html=1;align=center;verticalAlign=top;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=11;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="1425" y="210" width="110" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Arrow: Compose -> Users -->
+        <mxCell id="e6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#82b366;strokeWidth=2;" edge="1" parent="1" source="compose" target="users">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="cos_note" value="No TMT tests does NOT mean package approved.&#xa;Gating depends on required results and waivers.&#xa;bootupd smoke tests are implemented upstream;&#xa;downstream policy must be checked separately." style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=18;verticalAlign=middle;align=center;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;fontStyle=1;fontColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="700" y="380" width="440" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- Arrow from note to gate -->
+        <mxCell id="e_note" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;strokeColor=#b85450;strokeWidth=2;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="cos_note" target="gate">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Stage numbers -->
+        <mxCell id="s1" value="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#6c8ebf;strokeColor=#6c8ebf;fontColor=#ffffff;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="55" y="105" width="25" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="s2" value="2" style="ellipse;whiteSpace=wrap;html=1;fillColor=#6c8ebf;strokeColor=#6c8ebf;fontColor=#ffffff;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="170" y="95" width="25" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="s3" value="3" style="ellipse;whiteSpace=wrap;html=1;fillColor=#6c8ebf;strokeColor=#6c8ebf;fontColor=#ffffff;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="430" y="55" width="25" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="s4" value="4" style="ellipse;whiteSpace=wrap;html=1;fillColor=#6c8ebf;strokeColor=#6c8ebf;fontColor=#ffffff;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="700" y="50" width="25" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="s5" value="5" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d6b656;strokeColor=#d6b656;fontColor=#ffffff;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="960" y="65" width="25" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="s6" value="6" style="ellipse;whiteSpace=wrap;html=1;fillColor=#82b366;strokeColor=#82b366;fontColor=#ffffff;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1220" y="95" width="25" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="s7" value="7" style="ellipse;whiteSpace=wrap;html=1;fillColor=#82b366;strokeColor=#82b366;fontColor=#ffffff;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1460" y="95" width="25" height="25" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

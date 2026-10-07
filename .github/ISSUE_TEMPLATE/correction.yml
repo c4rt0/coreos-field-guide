@@ -1,0 +1,32 @@
+name: Correction
+description: Something in the guide is wrong, outdated, or unclear.
+labels: [correction]
+body:
+  - type: input
+    id: page
+    attributes:
+      label: Page
+      description: Path or link to the page, for example `projects/ignition/README.md`.
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is wrong
+      description: Quote the text or describe the diagram that needs fixing.
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: Correct information and public source
+      description: Link the public documentation, source code, or release that shows the correct behavior, and the branch or release it applies to.
+    validations:
+      required: true
+  - type: checkboxes
+    id: public
+    attributes:
+      label: Public information only
+      options:
+        - label: This issue contains no internal, customer, or private tracker information.
+          required: true

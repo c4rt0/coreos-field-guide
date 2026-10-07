@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Fedora CoreOS issue tracker
+    url: https://github.com/coreos/fedora-coreos-tracker/issues
+    about: Bugs in Fedora CoreOS itself belong upstream, not in this guide.

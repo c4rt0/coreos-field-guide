@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="drawio" version="30.0.4">
+  <diagram name="Immutable OS Basics" id="immutable-basics">
+    <mxGraphModel dx="1800" dy="1400" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1800" pageHeight="1400" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- ==================== TITLE ==================== -->
+        <mxCell id="title" value="What is an Immutable OS?" style="text;html=1;align=center;verticalAlign=middle;fontSize=28;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="400" y="20" width="500" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="...and why does Fedora CoreOS use one?" style="text;html=1;align=center;verticalAlign=middle;fontSize=16;fontColor=#888888;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="400" y="60" width="500" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== LEFT: TRADITIONAL OS ==================== -->
+        <mxCell id="trad_lane" value="" style="rounded=1;container=1;pointerEvents=0;whiteSpace=wrap;html=1;fillColor=#FFEBEE;strokeColor=#C62828;strokeWidth=2;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="120" width="560" height="560" as="geometry" />
+        </mxCell>
+        <mxCell id="trad_title" value="Traditional OS (like your laptop)" style="text;html=1;align=center;verticalAlign=middle;fontSize=20;fontStyle=1;fontColor=#C62828;" vertex="1" parent="trad_lane">
+          <mxGeometry x="60" y="15" width="440" height="35" as="geometry" />
+        </mxCell>
+
+        <!-- House analogy -->
+        <mxCell id="trad_analogy" value="Analogy: A house where anyone can knock down walls" style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontColor=#C62828;fontStyle=2;" vertex="1" parent="trad_lane">
+          <mxGeometry x="60" y="50" width="440" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- Fresh install -->
+        <mxCell id="trad_fresh" value="Fresh Install" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#C62828;fontSize=16;fontStyle=1;" vertex="1" parent="trad_lane">
+          <mxGeometry x="160" y="100" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="trad_fresh_desc" value="Everything works perfectly!" style="text;html=1;align=center;verticalAlign=middle;fontSize=12;fontColor=#555555;" vertex="1" parent="trad_lane">
+          <mxGeometry x="160" y="155" width="240" height="20" as="geometry" />
+        </mxCell>
+
+        <mxCell id="trad_arrow1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#C62828;strokeWidth=2;exitX=1;exitY=0.5;entryX=1;entryY=0.5;" edge="1" parent="trad_lane" source="trad_fresh" target="trad_time">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="440" y="128" />
+              <mxPoint x="440" y="228" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Over time -->
+        <mxCell id="trad_time" value="Months Later..." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#C62828;fontSize=16;fontStyle=1;" vertex="1" parent="trad_lane">
+          <mxGeometry x="160" y="200" width="240" height="55" as="geometry" />
+        </mxCell>
+
+        <!-- Bad things that happen -->
+        <mxCell id="trad_bad1" value="Someone ran sudo dnf install&#xa;and broke a dependency" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EF9A9A;strokeColor=#C62828;fontSize=11;verticalAlign=middle;" vertex="1" parent="trad_lane">
+          <mxGeometry x="30" y="290" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="trad_bad2" value="A config file was edited&#xa;and nobody remembers how" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EF9A9A;strokeColor=#C62828;fontSize=11;verticalAlign=middle;" vertex="1" parent="trad_lane">
+          <mxGeometry x="250" y="290" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="trad_bad3" value="Two servers that should&#xa;be identical... aren't" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EF9A9A;strokeColor=#C62828;fontSize=11;verticalAlign=middle;" vertex="1" parent="trad_lane">
+          <mxGeometry x="30" y="360" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="trad_bad4" value="An update partially applied&#xa;and left a broken system" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EF9A9A;strokeColor=#C62828;fontSize=11;verticalAlign=middle;" vertex="1" parent="trad_lane">
+          <mxGeometry x="250" y="360" width="200" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="trad_a2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#C62828;dashed=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="trad_lane" source="trad_time" target="trad_bad1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="trad_a3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#C62828;dashed=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="trad_lane" source="trad_time" target="trad_bad2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="trad_a4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#C62828;dashed=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="trad_lane" source="trad_bad1" target="trad_bad3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="trad_a5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#C62828;dashed=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="trad_lane" source="trad_bad2" target="trad_bad4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Result -->
+        <mxCell id="trad_result" value="Risk: &quot;Configuration Drift&quot;&#xa;Machines can become unique snowflakes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D32F2F;strokeColor=#B71C1C;fontSize=14;fontStyle=1;fontColor=#FFFFFF;verticalAlign=middle;" vertex="1" parent="trad_lane">
+          <mxGeometry x="80" y="440" width="400" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="trad_result_desc" value="Configuration management can mitigate this risk" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontColor=#C62828;fontStyle=2;" vertex="1" parent="trad_lane">
+          <mxGeometry x="80" y="498" width="400" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== RIGHT: IMMUTABLE OS ==================== -->
+        <mxCell id="imm_lane" value="" style="rounded=1;container=1;pointerEvents=0;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#2E7D32;strokeWidth=2;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="660" y="120" width="560" height="560" as="geometry" />
+        </mxCell>
+        <mxCell id="imm_title" value="Immutable OS (like Fedora CoreOS)" style="text;html=1;align=center;verticalAlign=middle;fontSize=20;fontStyle=1;fontColor=#2E7D32;" vertex="1" parent="imm_lane">
+          <mxGeometry x="60" y="15" width="440" height="35" as="geometry" />
+        </mxCell>
+
+        <!-- House analogy -->
+        <mxCell id="imm_analogy" value="Analogy: A tested OS image; config and data stay separate" style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontColor=#2E7D32;fontStyle=2;" vertex="1" parent="imm_lane">
+          <mxGeometry x="40" y="50" width="480" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- How it works: 3 simple rules -->
+        <mxCell id="rule_header" value="Three Simple Rules" style="text;html=1;align=center;verticalAlign=middle;fontSize=16;fontStyle=1;fontColor=#2E7D32;" vertex="1" parent="imm_lane">
+          <mxGeometry x="110" y="90" width="340" height="25" as="geometry" />
+        </mxCell>
+
+        <mxCell id="rule1" value="/usr is normally READ-ONLY" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=16;fontStyle=1;verticalAlign=middle;" vertex="1" parent="imm_lane">
+          <mxGeometry x="60" y="130" width="420" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="rule1_desc" value="Normal mounts block writes; privileged mechanisms can change&#xa;the system. Read-only alone is not tamper-proof." style="text;html=1;align=center;verticalAlign=top;fontSize=11;fontColor=#555555;" vertex="1" parent="imm_lane">
+          <mxGeometry x="60" y="180" width="420" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="rule2" value="/etc is writable (your config)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F9A825;fontSize=16;fontStyle=1;verticalAlign=middle;" vertex="1" parent="imm_lane">
+          <mxGeometry x="60" y="230" width="420" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="rule2_desc" value="OSTree retains local edits even when OS defaults change.&#xa;No textual conflict markers; review new defaults yourself." style="text;html=1;align=center;verticalAlign=top;fontSize=11;fontColor=#555555;" vertex="1" parent="imm_lane">
+          <mxGeometry x="60" y="280" width="420" height="35" as="geometry" />
+        </mxCell>
+
+        <mxCell id="rule3" value="/var is writable (your data)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#1565C0;fontSize=16;fontStyle=1;verticalAlign=middle;" vertex="1" parent="imm_lane">
+          <mxGeometry x="60" y="330" width="420" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="rule3_desc" value="Shared persistent state; services and migrations can change it.&#xa;OS rollback does not roll back this data." style="text;html=1;align=center;verticalAlign=top;fontSize=11;fontColor=#555555;" vertex="1" parent="imm_lane">
+          <mxGeometry x="60" y="380" width="420" height="35" as="geometry" />
+        </mxCell>
+
+        <!-- Result -->
+        <mxCell id="imm_result" value="Result: Consistent OS deployments across a fleet&#xa;Configuration and mutable state remain separate" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2E7D32;strokeColor=#1B5E20;fontSize=14;fontStyle=1;fontColor=#FFFFFF;verticalAlign=middle;" vertex="1" parent="imm_lane">
+          <mxGeometry x="60" y="440" width="420" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="imm_result_desc" value="Rollback is explicit recovery.&#xa;It is not automatic in every system." style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontColor=#2E7D32;fontStyle=2;" vertex="1" parent="imm_lane">
+          <mxGeometry x="60" y="498" width="420" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== BOTTOM: UPDATE FLOW ==================== -->
+        <mxCell id="update_bg" value="" style="rounded=1;container=1;pointerEvents=0;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;strokeWidth=2;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="710" width="1180" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="update_title" value="How Deployment-Based Updates Work" style="text;html=1;align=center;verticalAlign=middle;fontSize=20;fontStyle=1;fontColor=#7B1FA2;" vertex="1" parent="update_bg">
+          <mxGeometry x="300" y="10" width="580" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="update_analogy" value="Stage a new deployment, then select it at reboot. This does not imply A/B disk partitions." style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontColor=#7B1FA2;fontStyle=2;" vertex="1" parent="update_bg">
+          <mxGeometry x="240" y="45" width="700" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- Step 1 -->
+        <mxCell id="u1" value="Running&#xa;Deployment A" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#CE93D8;strokeColor=#7B1FA2;fontSize=14;fontStyle=1;verticalAlign=middle;" vertex="1" parent="update_bg">
+          <mxGeometry x="30" y="100" width="180" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="u1_desc" value="This is the currently booted&#xa;OS deployment." style="text;html=1;align=center;verticalAlign=top;fontSize=10;fontColor=#555555;" vertex="1" parent="update_bg">
+          <mxGeometry x="20" y="165" width="200" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Arrow 1 -->
+        <mxCell id="ua1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#7B1FA2;strokeWidth=2;" edge="1" parent="update_bg" source="u1" target="u2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Step 2 -->
+        <mxCell id="u2" value="New deployment&#xa;is staged" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#CE93D8;strokeColor=#7B1FA2;fontSize=14;fontStyle=1;verticalAlign=middle;" vertex="1" parent="update_bg">
+          <mxGeometry x="280" y="90" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="u2_desc" value="The booted deployment remains&#xa;in place while the update stages." style="text;html=1;align=center;verticalAlign=top;fontSize=10;fontColor=#555555;" vertex="1" parent="update_bg">
+          <mxGeometry x="270" y="175" width="200" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Arrow 2 -->
+        <mxCell id="ua2" value="reboot" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#7B1FA2;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#7B1FA2;" edge="1" parent="update_bg" source="u2" target="u3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Step 3 -->
+        <mxCell id="u3" value="After reboot:&#xa;Deployment B booted" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#CE93D8;strokeColor=#7B1FA2;fontSize=14;fontStyle=1;verticalAlign=middle;" vertex="1" parent="update_bg">
+          <mxGeometry x="530" y="100" width="180" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="u3_desc" value="The previous deployment may remain&#xa;available for manual recovery." style="text;html=1;align=center;verticalAlign=top;fontSize=10;fontColor=#555555;" vertex="1" parent="update_bg">
+          <mxGeometry x="520" y="165" width="200" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Arrow 3 -->
+        <mxCell id="ua3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#7B1FA2;strokeWidth=2;" edge="1" parent="update_bg" source="u3" target="u4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Step 4 -->
+        <mxCell id="u4" value="Need to&#xa;recover?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#F8BBD0;strokeColor=#C2185B;fontSize=14;fontStyle=1;verticalAlign=middle;" vertex="1" parent="update_bg">
+          <mxGeometry x="770" y="90" width="160" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Yes arrow (rollback) -->
+        <mxCell id="ua4_yes" value="Yes: select A&#xa;then reboot" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#C2185B;strokeWidth=2;fontSize=11;fontStyle=1;fontColor=#C2185B;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="update_bg" source="u4" target="u_rollback">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="0" y="-45" as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- No label -->
+        <mxCell id="ua4_no" value="No: keep running B" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=1;fontColor=#2E7D32;" vertex="1" parent="update_bg">
+          <mxGeometry x="790" y="180" width="120" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- Rollback box -->
+        <mxCell id="u_rollback" value="Deployment A&#xa;booted again" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=13;fontStyle=1;verticalAlign=middle;" vertex="1" parent="update_bg">
+          <mxGeometry x="980" y="105" width="150" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== BOTTOM: WHO USES THIS ==================== -->
+        <mxCell id="who_title" value="Who uses immutable OSes and why?" style="text;html=1;align=center;verticalAlign=middle;fontSize=16;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="370" y="1010" width="520" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="who1" value="OpenShift / Kubernetes clusters" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=13;fontStyle=1;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="70" y="1050" width="250" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="who1_desc" value="Thousands of identical worker nodes.&#xa;Can't have each one drifting differently." style="text;html=1;align=center;verticalAlign=top;fontSize=10;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="60" y="1095" width="270" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="who2" value="Edge / IoT devices" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=13;fontStyle=1;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="380" y="1050" width="250" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="who2_desc" value="Devices in remote locations you can't&#xa;physically access. Rollback is critical." style="text;html=1;align=center;verticalAlign=top;fontSize=10;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="370" y="1095" width="270" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="who3" value="Security-sensitive servers" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=13;fontStyle=1;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="690" y="1050" width="250" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="who3_desc" value="Read-only mounts limit ordinary writes,&#xa;but are not tamper-proof by themselves." style="text;html=1;align=center;verticalAlign=top;fontSize=10;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="670" y="1095" width="290" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="sources" value="Sources: public OSTree deployment, upgrade, and /var documentation; citations in 02-coreos-ecosystem.md." style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="40" y="1150" width="1180" height="30" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,18 @@
+# Local notes and working memory are not part of the public guide.
+/memory/
+TODO.md
+
+# Local environments and generated Python files.
+.venv/
+__pycache__/
+*.py[cod]
+
+# Local machine files and editor state.
+.DS_Store
+Thumbs.db
+*.swp
+
+# Local environment files. Keep example templates explicitly named.
+.env
+.env.*
+!.env.example

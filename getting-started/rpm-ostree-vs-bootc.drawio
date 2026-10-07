@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="drawio" compressed="false">
+  <diagram id="rpm-ostree-vs-bootc" name="rpm-ostree vs bootc">
+    <mxGraphModel dx="1100" dy="900" grid="1" gridSize="10" guides="1" connect="1" arrows="1" page="1" pageScale="1" pageWidth="1100" pageHeight="900" background="#ffffff">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- rpm-ostree lane -->
+        <mxCell id="rpm" value="rpm-ostree management" style="swimlane;startSize=35;horizontal=1;rounded=1;html=1;whiteSpace=wrap;container=1;collapsible=0;fontFamily=Arial;fontSize=18;fontStyle=1;align=left;spacingLeft=15;fillColor=#dae8fc;swimlaneFillColor=#ffffff;strokeColor=#6c8ebf;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="20" y="20" width="1060" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="r1" value="RPM manifests or&#xa;Containerfile-derived&#xa;OS images" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=14;fontColor=#172b4d;spacing=6;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" vertex="1" parent="rpm">
+          <mxGeometry x="20" y="55" width="170" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="r2" value="COSA / rpm-ostree&#xa;compose OS content" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=14;fontColor=#263b23;spacing=6;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;" vertex="1" parent="rpm">
+          <mxGeometry x="230" y="55" width="170" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="r3" value="OSTree repo, bootable&#xa;image, or OCI transport" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=14;fontColor=#4b3500;spacing=6;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;" vertex="1" parent="rpm">
+          <mxGeometry x="440" y="55" width="170" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="r4" value="Zincati + Cincinnati&#xa;+ OCI transport" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=14;fontColor=#3b1f54;spacing=6;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;" vertex="1" parent="rpm">
+          <mxGeometry x="650" y="55" width="170" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="r5" value="rpm-ostree stages&#xa;a deployment" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=14;fontColor=#4b3500;spacing=6;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=2;" vertex="1" parent="rpm">
+          <mxGeometry x="860" y="55" width="170" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="re1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="rpm" source="r1" target="r2"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="re2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="rpm" source="r2" target="r3"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="re3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="rpm" source="r3" target="r4"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="re4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="rpm" source="r4" target="r5"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <!-- bootc lane -->
+        <mxCell id="bootc" value="bootc management" style="swimlane;startSize=35;horizontal=1;rounded=1;html=1;whiteSpace=wrap;container=1;collapsible=0;fontFamily=Arial;fontSize=18;fontStyle=1;align=left;spacingLeft=15;fillColor=#d5e8d4;swimlaneFillColor=#ffffff;strokeColor=#82b366;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="20" y="220" width="1060" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="b1" value="Containerfile or&#xa;manifest-based build" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=14;fontColor=#172b4d;spacing=6;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" vertex="1" parent="bootc">
+          <mxGeometry x="20" y="55" width="170" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="b2" value="Podman / Buildah&#xa;image builder" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=14;fontColor=#263b23;spacing=6;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;" vertex="1" parent="bootc">
+          <mxGeometry x="230" y="55" width="170" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="b3" value="Container registry&#xa;Quay, Docker Hub" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=14;fontColor=#4b3500;spacing=6;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;" vertex="1" parent="bootc">
+          <mxGeometry x="440" y="55" width="170" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="b4" value="bootc install&#xa;from target image" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=14;fontColor=#3b1f54;spacing=6;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;" vertex="1" parent="bootc">
+          <mxGeometry x="650" y="55" width="170" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="b5" value="bootc upgrade&#xa;OSTree backend" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=14;fontColor=#4b3500;spacing=6;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=2;" vertex="1" parent="bootc">
+          <mxGeometry x="860" y="55" width="170" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="be1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="bootc" source="b1" target="b2"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="be2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="bootc" source="b2" target="b3"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="be3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="bootc" source="b3" target="b4"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="be4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="bootc" source="b4" target="b5"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <!-- Shared outcome -->
+        <mxCell id="shared" value="Deployment-based update&#xa;Read-only OS content; /etc and /var writable" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=16;fontColor=#4b3500;spacing=10;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="200" y="430" width="340" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="reboot" value="Reboot selects&#xa;the staged deployment" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=16;fontColor=#263b23;spacing=10;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="620" y="430" width="260" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="running" value="New deployment running" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=16;fontColor=#3b1f54;spacing=10;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="400" y="550" width="300" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="se1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="r5" target="shared"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="se2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="b5" target="shared"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="se3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="shared" target="reboot"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="se4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="reboot" target="running"><mxGeometry relative="1" as="geometry" /></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

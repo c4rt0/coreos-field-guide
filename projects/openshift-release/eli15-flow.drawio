@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="drawio" compressed="false">
+  <diagram id="projects-openshift-release-eli15-flow" name="OpenShift Release ELI15">
+    <mxGraphModel dx="1140" dy="160" grid="1" gridSize="10" guides="1" connect="1" arrows="1" page="1" pageScale="1" pageWidth="1140" pageHeight="160" background="#ffffff">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="2" value="Component build and&#xa;test settings" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=18;fontColor=#172b4d;spacing=10;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" vertex="1" parent="1"><mxGeometry x="30" y="40" width="240" height="80" as="geometry" /></mxCell>
+        <mxCell id="3" value="CI job definitions&#xa;are generated" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=18;fontColor=#263b23;spacing=10;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;" vertex="1" parent="1"><mxGeometry x="310" y="40" width="240" height="80" as="geometry" /></mxCell>
+        <mxCell id="4" value="Prow schedules&#xa;the jobs" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=18;fontColor=#4b3500;spacing=10;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;" vertex="1" parent="1"><mxGeometry x="590" y="40" width="240" height="80" as="geometry" /></mxCell>
+        <mxCell id="5" value="Build and test results&#xa;are reported" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=18;fontColor=#3b1f54;spacing=10;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;" vertex="1" parent="1"><mxGeometry x="870" y="40" width="240" height="80" as="geometry" /></mxCell>
+        <mxCell id="6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="2" target="3"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="3" target="4"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="4" target="5"><mxGeometry relative="1" as="geometry" /></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="drawio" compressed="false">
+  <diagram id="testing-gating" name="Artifact Test Trace">
+    <mxGraphModel dx="800" dy="700" grid="1" gridSize="10" guides="1" connect="1" arrows="1" page="1" pageScale="1" pageWidth="800" pageHeight="700" background="#ffffff">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- 1. Build -->
+        <mxCell id="step1" value="1. Build&#xa;&#xa;source, binary, PR-built RPM,&#xa;or repo package?" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=16;fontColor=#172b4d;spacing=10;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="100" y="30" width="300" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- 2. Discovery -->
+        <mxCell id="step2" value="2. Discovery&#xa;&#xa;which TMT plan and test selected?" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=16;fontColor=#172b4d;spacing=10;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="100" y="160" width="300" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- 3. Preparation -->
+        <mxCell id="step3" value="3. Preparation&#xa;&#xa;candidate installed or just present?" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=16;fontColor=#594300;spacing=10;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="100" y="290" width="300" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- 4. Execution -->
+        <mxCell id="step4" value="4. Execution&#xa;&#xa;smoke test or integration test?" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=16;fontColor=#263b23;spacing=10;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="100" y="420" width="300" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- 5. Policy -->
+        <mxCell id="step5" value="5. Policy&#xa;&#xa;which gate consumes the result?" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=16;fontColor=#432874;spacing=10;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="100" y="550" width="300" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- Edges -->
+        <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="step1" target="step2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="step2" target="step3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="step3" target="step4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#46556b;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="step4" target="step5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Callout box -->
+        <mxCell id="callout" value="Same TMT metadata&#xa;does NOT guarantee&#xa;same artifact tested" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Arial;fontSize=14;fontStyle=3;fontColor=#67000d;spacing=10;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=1;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="520" y="310" width="220" height="80" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
